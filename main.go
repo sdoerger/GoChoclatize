@@ -8,19 +8,27 @@ import (
 	// "io"
 	"io/ioutil"
 	// "os"
-	"strings"
 )
 
 func main() {
 	// -----------------
 	// Command line Args
 	// -----------------
-	// argsWithProg := os.Args
-	cmdLnArgs := os.Args[1:]
-	stringed := strings.Join(cmdLnArgs, " ")
+	cmdLnArgs := os.Args
+
+	// Absolute path to files
+	dirPath := cmdLnArgs[1]
+
+	// Limit of files into a new dir
+	fileLimit := cmdLnArgs[2]
+
+	// dirMax :=
 
 	// List files in dir from command line path
-	files, err := ioutil.ReadDir(stringed)
+	files, err := ioutil.ReadDir(dirPath)
+	// Total files
+	dirTotal := len(files)
+
 	// files, err := ioutil.ReadDir("./")
 	if err != nil {
 		log.Fatal(err)
@@ -31,6 +39,7 @@ func main() {
 		fmt.Println(f.Name())
 	}
 
-	fmt.Printf("%d Files \n", len(files))
+	fmt.Printf("Total of %d Files \n", dirTotal)
+	fmt.Printf("Limit at %v files \n", fileLimit)
 
 }
