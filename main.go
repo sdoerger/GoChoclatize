@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 
 	// "io"
 	"io/ioutil"
@@ -14,13 +13,17 @@ func main() {
 	// -----------------
 	// Command line Args
 	// -----------------
-	cmdLnArgs := os.Args
+	// cmdLnArgs := os.Args
 
 	// Absolute path to files
-	dirPath := cmdLnArgs[1]
+	dirPath := "/home/stefan/Downloads/ttest"
+	// TODO: CMT IN/OUT
+	// dirPath := cmdLnArgs[1]
 
 	// Limit of files into a new dir
-	fileLimit := cmdLnArgs[2]
+	// TODO: CMT IN/OUT
+	fileLimit := 2
+	// fileLimit := cmdLnArgs[2]
 
 	// dirMax :=
 
@@ -34,10 +37,21 @@ func main() {
 		log.Fatal(err)
 	}
 
-	for _, f := range files {
-		// fmt.Print("File:")
-		fmt.Println(f.Name())
-	}
+	// Amoutn of dirs
+	dirAmount := (dirTotal) / (fileLimit)
+	fmt.Println(dirAmount)
+
+	// Files for last dir
+	leftFiles := dirTotal % fileLimit
+	fmt.Println(leftFiles)
+
+	// -----------------
+	// Looops through files
+	// -----------------
+	// for _, f := range files {
+	// 	// fmt.Print("File:")
+	// 	fmt.Println(f.Name())
+	// }
 
 	fmt.Printf("Total of %d Files \n", dirTotal)
 	fmt.Printf("Limit at %v files \n", fileLimit)
