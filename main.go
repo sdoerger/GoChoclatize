@@ -8,7 +8,7 @@ import (
 	// "io"
 	"io/fs"
 	"io/ioutil"
-	// "os"
+	"path/filepath"
 )
 
 func main() {
@@ -27,7 +27,7 @@ func main() {
 
 	// Limit of files into a new dir
 	// TODO: CMT IN/OUT
-	fileLimit := 2
+	fileLimit := 10
 	// fileLimit := cmdLnArgs[2]
 
 	// dirMax :=
@@ -42,7 +42,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Amoutn of dirs
+	// Amount of dirs
 	dirAmount := (filesTotal) / (fileLimit)
 	fmt.Println("dirAmount")
 	fmt.Println(dirAmount)
@@ -59,13 +59,16 @@ func main() {
 	e := fileLimit
 	fmt.Println(s, e)
 
-	makeDir(dirPath)
+	makeDir(dirPath, "gochoc")
 
 	// LOOP THROUGH DIR AMOUNT
 	for i := 0; i < dirAmount; i++ {
 
+		fmt.Println("Index")
+		fmt.Println(i)
+
 		// Copy files to dirs
-		copyFiles(s, e, dirPath, files)
+		copyFiles(s, e, dirPath, files, i)
 		s += fileLimit
 		// Fle selection end
 		e += fileLimit
@@ -96,9 +99,9 @@ func checkExtraLength(d int, lF int) int {
 	}
 }
 
-func makeDir(p string /* dir path */) {
+func makeDir(p string /* dir path */, n string /* dir name */) {
 	// TODO: CMT IN
-	// err := os.Mkdir(p+"/gochoc", 0755)
+	// err := os.Mkdir(p + "/" + n, 0755)
 	// if err != nil {
 	// 	log.Fatal(err)
 	// }
@@ -106,21 +109,48 @@ func makeDir(p string /* dir path */) {
 
 }
 
-func copyFiles(s int /* start index */, e int /* end index */, d string /* dir path */, f []fs.FileInfo /* fles */) {
+func copyFiles(s int /* start index */, e int /* end index */, d string /* dir path */, f []fs.FileInfo /* files */, i int /* index for dir */) {
 	// s = START
 	// e = END
+
+	fmt.Println("Current Index")
+	fmt.Println(i)
+
+	dn := strings("dir_" + i) // dir name
+
+	makeDir(d, dn)
 
 	// Current File Selection
 	cfs := f[s:e]
 
-	original, err := os.Open(d + "/test_1.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("original")
-	fmt.Println(original.Name())
-	defer original.Close()
+	for _, file := range cfs {
+		// Exclude destination dir
+		f := file.Name()
 
-	fmt.Println("NEW SLICE")
-	fmt.Println(cfs)
+		if f != "gochoc" {
+			// fmt.Println(f)
+
+			// Open original file
+			original, err := os.Open(d + "/" + f)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			defer original.Close()
+
+			// Get file name
+			fn := filepath.Base(original.Name())
+			fmt.Println(fn)
+
+			// Create new file
+			new, err := os.Create(d + "/gochoc/" + fn)
+			if err != nil {
+				log.Fatal(err)
+			}
+			defer new.Close()
+
+		}
+
+	}
+
 }
