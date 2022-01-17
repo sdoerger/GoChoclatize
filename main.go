@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
-
-	// "io"
 	"io/fs"
 	"io/ioutil"
+	"log"
+	"os"
 	"path/filepath"
+	"strconv"
 )
 
 func main() {
@@ -116,7 +115,10 @@ func copyFiles(s int /* start index */, e int /* end index */, d string /* dir p
 	fmt.Println("Current Index")
 	fmt.Println(i)
 
-	dn := strings("dir_" + i) // dir name
+	dn := "dir_" + strconv.Itoa(i) // dir name
+
+	fmt.Println("dn")
+	fmt.Println(dn)
 
 	makeDir(d, dn)
 
