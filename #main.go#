@@ -84,7 +84,9 @@ func main() {
 	// 	fmt.Println(f.Name())
 	// }
 
-	fmt.Printf("Total of %d Files where moved to %d directories (%d files/dir).", filesTotal, dirAmount, fileLimit)
+	fmt.Printf("Total of %d Files \n", filesTotal)
+	fmt.Printf("Limit at %v files \n", fileLimit)
+
 }
 
 // If there are left files (not fill the last dir) add 1 to dir length
@@ -144,7 +146,7 @@ func copyFiles(s int /* start index */, e int /* end index */, d string /* dir p
 
 			// Create new file
 			new, err := os.Create(d + "/gochoc/" + fn)
-			if err != nil {
+			if err != 
 				log.Fatal(err)
 			}
 			defer new.Close()
