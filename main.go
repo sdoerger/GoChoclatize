@@ -1,14 +1,13 @@
 package main
 
 import (
+	copy "choclatzie/pkg/copy"
 	"fmt"
-	"io/fs"
 	"io/ioutil"
 	"log"
-	"os"
-	"path/filepath"
-	"strconv"
 )
+
+const targetDir string = "/gochoc"
 
 func main() {
 	// CLEAR CONSOLE
@@ -19,7 +18,7 @@ func main() {
 	// -----------------
 	// cmdLnArgs := os.Args
 
-	// Absolute path to files
+	// Absolute path to filesdirPath + targetDir
 	dirPath := "/home/stefan/Downloads/ttest"
 	// TODO: CMT IN/OUT
 	// dirPath := cmdLnArgs[1]
@@ -58,7 +57,8 @@ func main() {
 	e := fileLimit
 	fmt.Println(s, e)
 
-	makeDir(dirPath, "gochoc")
+	// TODO: CMT IN
+	// make.MakeDir(dirPath, "gochoc")
 
 	// LOOP THROUGH DIR AMOUNT
 	for i := 0; i < dirAmount; i++ {
@@ -67,7 +67,7 @@ func main() {
 		fmt.Println(i)
 
 		// Copy files to dirs
-		copyFiles(s, e, dirPath, files, i)
+		copy.CopyFiles(s, e, (dirPath + "/" + targetDir), files, i, targetDir)
 		s += fileLimit
 		// Fle selection end
 		e += fileLimit
@@ -94,63 +94,4 @@ func checkExtraLength(d int, lF int) int {
 	} else {
 		return d + 0
 	}
-}
-
-func makeDir(p string /* dir path */, n string /* dir name */) {
-	// TODO: CMT IN
-	// err := os.Mkdir(p + "/" + n, 0755)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	fmt.Println(p)
-
-}
-
-func copyFiles(s int /* start index */, e int /* end index */, d string /* dir path */, f []fs.FileInfo /* files */, i int /* index for dir */) {
-	// s = START
-	// e = END
-
-	fmt.Println("Current Index")
-	fmt.Println(i)
-
-	dn := "dir_" + strconv.Itoa(i) // dir name
-
-	fmt.Println("dn")
-	fmt.Println(dn)
-
-	makeDir(d, dn)
-
-	// Current File Selection
-	cfs := f[s:e]
-
-	for _, file := range cfs {
-		// Exclude destination dir
-		f := file.Name()
-
-		if f != "gochoc" {
-			// fmt.Println(f)
-
-			// Open original file
-			original, err := os.Open(d + "/" + f)
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			defer original.Close()
-
-			// Get file name
-			fn := filepath.Base(original.Name())
-			fmt.Println(fn)
-
-			// Create new file
-			new, err := os.Create(d + "/gochoc/" + fn)
-			if err != nil {
-				log.Fatal(err)
-			}
-			defer new.Close()
-
-		}
-
-	}
-
 }
