@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-const targetDir string = "/gochoc"
+const targetDir string = "gochoc"
 
 func main() {
 	// CLEAR CONSOLE
@@ -67,7 +67,7 @@ func main() {
 		fmt.Println(i)
 
 		// Copy files to dirs
-		copy.CopyFiles(s, e, (dirPath + "/" + targetDir), files, i, targetDir)
+		copy.CopyFiles(s, e, (dirPath), files, i, targetDir)
 		s += fileLimit
 		// Fle selection end
 		e += fileLimit

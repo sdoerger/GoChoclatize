@@ -20,6 +20,8 @@ func CopyFiles(s int /* start index */, e int /* end index */, d string /* dir p
 	dn := "dir_" + strconv.Itoa(i+1) // dir name + index
 
 	fmt.Println("RUNS")
+	fmt.Println(d)
+	fmt.Println(dn)
 	make.MakeDir(d, dn)
 
 	// Current File Selection
