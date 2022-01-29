@@ -2,6 +2,7 @@ package main
 
 import (
 	copy "choclatzie/pkg/copy"
+	make "choclatzie/pkg/make"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -60,7 +61,7 @@ func main() {
 	// fmt.Println(s, e)
 
 	// TODO: CMT IN
-	// make.MakeDir(dirPath, "gochoc")
+	make.MakeDir(dirPath, targetDir)
 
 	// LOOP THROUGH DIR AMOUNT
 	for i := 0; i < dirAmount; i++ {
@@ -69,7 +70,7 @@ func main() {
 		// fmt.Println(i)
 
 		// Copy files to dirs
-		copy.CopyFiles(s, e, (dirPath), files, i, targetDir)
+		copy.CopyFiles(s, e, (dirPath + "/" + targetDir), files, i, targetDir)
 		s += fileLimit
 		// Fle selection end
 		e += fileLimit

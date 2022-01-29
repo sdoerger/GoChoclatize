@@ -3,11 +3,7 @@ package copy
 import (
 	make "choclatzie/pkg/make"
 	"fmt"
-	"io"
 	"io/fs"
-	"log"
-	"os"
-	"path/filepath"
 	"strconv"
 )
 
@@ -17,55 +13,56 @@ func CopyFiles(s int /* start index */, e int /* end index */, d string /* dir p
 
 	// fmt.Println("Current Index")
 	// fmt.Println(i)
+	fmt.Println(targetDir)
 
 	dn := "dir_" + strconv.Itoa(i+1) // dir name + index
 
 	// CREATE: Dir for current file range
 	make.MakeDir(d, dn)
 
-	// Current File Selection
-	cfs := f[s:e]
+	// // Current File Selection
+	// cfs := f[s:e]
 
-	for _, file := range cfs {
-		// Exclude destination dir
-		f := file.Name()
+	// for _, file := range cfs {
+	// 	// Exclude destination dir
+	// 	f := file.Name()
 
-		if f != targetDir {
-			// fmt.Println(f)
+	// 	if f != targetDir {
+	// 		// fmt.Println(f)
 
-			// Open original file
-			original, err := os.Open(d + "/" + f)
-			if err != nil {
-				log.Fatal(err)
-			}
+	// 		// Open original file
+	// 		original, err := os.Open(d + "/" + f)
+	// 		if err != nil {
+	// 			log.Fatal(err)
+	// 		}
 
-			defer original.Close()
+	// 		defer original.Close()
 
-			// Get file name
-			fn := filepath.Base(original.Name())
+	// 		// Get file name
+	// 		fn := filepath.Base(original.Name())
 
-			// Create new file
-			fmt.Println("d + targetDir + fn")
-			fmt.Println(d + "/" + targetDir + "/" + dn + "/" + fn)
+	// 		// Create new file
+	// 		fmt.Println("d + targetDir + fn")
+	// 		fmt.Println(d + "/" + targetDir + "/" + dn + "/" + fn)
 
-			fmt.Println("I RUN")
+	// 		fmt.Println("I RUN")
 
-			// TODO: CMT IN
-			new, err := os.Create(d + "/" + targetDir + "/" + fn)
-			if err != nil {
-				log.Fatal(err)
-			}
-			defer new.Close()
+	// 		// TODO: CMT IN
+	// 		new, err := os.Create(d + "/" + targetDir + "/" + fn)
+	// 		if err != nil {
+	// 			log.Fatal(err)
+	// 		}
+	// 		defer new.Close()
 
-			//This will copy
-			bytesWritten, err := io.Copy(new, original)
-			if err != nil {
-				log.Fatal(err)
-			}
-			fmt.Printf("Bytes Written: %d\n", bytesWritten)
+	// 		//This will copy
+	// 		bytesWritten, err := io.Copy(new, original)
+	// 		if err != nil {
+	// 			log.Fatal(err)
+	// 		}
+	// 		fmt.Printf("Bytes Written: %d\n", bytesWritten)
 
-		}
+	// 	}
 
-	}
+	// }
 
 }
