@@ -9,10 +9,10 @@ import (
 func MakeDir(p string /* dir path */, n string /* dir name */) {
 	// TODO: CMT IN
 
-	fmt.Println(p + "/" + n)
+	// fmt.Println(p + "/" + n)
 
 	// CHECK: If dir exists
-	folderInfo, err := os.Stat(p + "/" + n)
+	_, err := os.Stat(p + "/" + n)
 	if os.IsNotExist(err) {
 
 		errr := os.Mkdir(p+"/"+n, 0755)
@@ -24,6 +24,6 @@ func MakeDir(p string /* dir path */, n string /* dir name */) {
 		// fmt.Println(p)
 
 	}
-	log.Println(folderInfo)
+	// log.Println(folderInfo)
 
 }
