@@ -3,6 +3,7 @@ package copy
 import (
 	make "choclatzie/pkg/make"
 	"fmt"
+	"io"
 	"io/fs"
 	"log"
 	"os"
@@ -54,18 +55,18 @@ func CopyFiles(s int /* start index */, e int /* end index */, d string /* dir p
 			fmt.Println("I RUN")
 
 			// TODO: CMT IN
-			// new, err := os.Create(d + "/" + targetDir + "/" + fn)
-			// if err != nil {
-			// 	log.Fatal(err)
-			// }
-			// defer new.Close()
+			new, err := os.Create(d + "/" + targetDir + "/" + dn + "/" + fn)
+			if err != nil {
+				log.Fatal(err)
+			}
+			defer new.Close()
 
-			// //This will copy
-			// bytesWritten, err := io.Copy(new, original)
-			// if err != nil {
-			// 	log.Fatal(err)
-			// }
-			// fmt.Printf("Bytes Written: %d\n", bytesWritten)
+			//This will copy
+			bytesWritten, err := io.Copy(new, original)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Printf("Bytes Written: %d\n", bytesWritten)
 
 		}
 
