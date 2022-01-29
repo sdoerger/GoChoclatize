@@ -3,6 +3,7 @@ package copy
 import (
 	make "choclatzie/pkg/make"
 	"fmt"
+	"io"
 	"io/fs"
 	"log"
 	"os"
@@ -14,14 +15,12 @@ func CopyFiles(s int /* start index */, e int /* end index */, d string /* dir p
 	// s = START
 	// e = END
 
-	fmt.Println("Current Index")
-	fmt.Println(i)
+	// fmt.Println("Current Index")
+	// fmt.Println(i)
 
 	dn := "dir_" + strconv.Itoa(i+1) // dir name + index
 
-	fmt.Println("RUNS")
-	fmt.Println(d)
-	fmt.Println(dn)
+	// CREATE: Dir for current file range
 	make.MakeDir(d, dn)
 
 	// Current File Selection
@@ -44,14 +43,26 @@ func CopyFiles(s int /* start index */, e int /* end index */, d string /* dir p
 
 			// Get file name
 			fn := filepath.Base(original.Name())
-			fmt.Println(fn)
 
 			// Create new file
-			new, err := os.Create(d + targetDir + fn)
+			fmt.Println("d + targetDir + fn")
+			fmt.Println(d + "/" + targetDir + "/" + dn + "/" + fn)
+
+			fmt.Println("I RUN")
+
+			// TODO: CMT IN
+			new, err := os.Create(d + "/" + targetDir + "/" + fn)
 			if err != nil {
 				log.Fatal(err)
 			}
 			defer new.Close()
+
+			//This will copy
+			bytesWritten, err := io.Copy(new, original)
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Printf("Bytes Written: %d\n", bytesWritten)
 
 		}
 

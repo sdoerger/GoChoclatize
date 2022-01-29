@@ -42,12 +42,14 @@ func main() {
 
 	// Amount of dirs
 	dirAmount := (filesTotal) / (fileLimit)
-	fmt.Println("dirAmount")
-	fmt.Println(dirAmount)
+	// fmt.Println("dirAmount")
+	// fmt.Println(dirAmount)
 
 	// Files for last dir
-	leftFiles := filesTotal % fileLimit
-	fmt.Println(leftFiles)
+
+	// TODO: CMNT IN
+	// leftFiles := filesTotal % fileLimit
+	// fmt.Println(leftFiles)
 
 	// neededDirAmout := checkExtraLength(dirAmount, leftFiles)
 
@@ -55,7 +57,7 @@ func main() {
 	s := 0
 	// FILES END
 	e := fileLimit
-	fmt.Println(s, e)
+	// fmt.Println(s, e)
 
 	// TODO: CMT IN
 	// make.MakeDir(dirPath, "gochoc")
@@ -63,15 +65,15 @@ func main() {
 	// LOOP THROUGH DIR AMOUNT
 	for i := 0; i < dirAmount; i++ {
 
-		fmt.Println("Index")
-		fmt.Println(i)
+		// fmt.Println("Index")
+		// fmt.Println(i)
 
 		// Copy files to dirs
 		copy.CopyFiles(s, e, (dirPath), files, i, targetDir)
 		s += fileLimit
 		// Fle selection end
 		e += fileLimit
-		fmt.Println(s, e)
+		// fmt.Println(s, e)
 
 		// Copy left files into last dir
 	}
