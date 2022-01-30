@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
+	"strconv"
 )
 
 const targetDir string = "gochoc"
@@ -17,17 +19,15 @@ func main() {
 	// -----------------
 	// Command line Args
 	// -----------------
-	// cmdLnArgs := os.Args
+	cmdLnArgs := os.Args
 
 	// Absolute path to filesdirPath + targetDir
-	dirPath := "/home/stefan/Downloads/ttest"
-	// TODO: CMT IN/OUT
-	// dirPath := cmdLnArgs[1]
+	dirPath := cmdLnArgs[1]
+	// dirPath := "/home/stefan/Downloads/ttest"
 
 	// Limit of files into a new dir
-	// TODO: CMT IN/OUT
-	fileLimit := 10
-	// fileLimit := cmdLnArgs[2]
+	fileLimit, err := strconv.Atoi(cmdLnArgs[2])
+	// fileLimit := 10
 
 	// dirMax :=
 
@@ -43,31 +43,18 @@ func main() {
 
 	// Amount of dirs
 	dirAmount := (filesTotal) / (fileLimit)
-	// fmt.Println("dirAmount")
-	// fmt.Println(dirAmount)
-
-	// Files for last dir
-
-	// TODO: CMNT IN
-	// leftFiles := filesTotal % fileLimit
-	// fmt.Println(leftFiles)
-
-	// neededDirAmout := checkExtraLength(dirAmount, leftFiles)
 
 	// FILES START
 	s := 0
 	// FILES END
 	e := fileLimit
-	// fmt.Println(s, e)
 
-	// TODO: CMT IN
 	make.MakeDir(dirPath, targetDir)
 
+	// -----------------
 	// LOOP THROUGH DIR AMOUNT
+	// -----------------
 	for i := 0; i < dirAmount; i++ {
-
-		// fmt.Println("Index")
-		// fmt.Println(i)
 
 		// Copy files to dirs
 		copy.CopyFiles(s, e, (dirPath), files, i, targetDir)
@@ -76,16 +63,23 @@ func main() {
 		e += fileLimit
 		// fmt.Println(s, e)
 
-		// Copy left files into last dir
 	}
 
 	// -----------------
-	// Looops through files
+	// LEFT FILES: Into last dir
 	// -----------------
-	// for _, f := range files {
-	// 	// fmt.Print("File:")
-	// 	fmt.Println(f.Name())
-	// }
+	lf := fileLimit * dirAmount
+	fmt.Println(lf)
+
+	if filesTotal-lf > 0 {
+		fmt.Println("Left files")
+
+		// DIR NAME
+		dn := "dir_" + strconv.Itoa(dirAmount+1) // dir name + index
+
+		make.MakeDir(dirPath+"/"+targetDir, dn)
+		copy.CopyFiles(lf, filesTotal, (dirPath), files, dirAmount, targetDir)
+	}
 
 	fmt.Printf("Total of %d Files where moved to %d directories (%d files/dir).", filesTotal, dirAmount, fileLimit)
 }
