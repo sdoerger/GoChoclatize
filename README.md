@@ -22,13 +22,19 @@ A simple script to split files into an unknown folder amount, with a limit per f
 Place the bin file GoScission whereever you like.
 Run it and add as parameters the path of the folder where your files are and the folder limit, i. e.:
 
-`./GoScission /home/myDirectore 10`
+`./GoScission /home/myDirectore 5`
 
 ## Result
 
-It creates a subfolder in your target folder with the files split into folders:
+It creates a subfolder (gosci) in your target folder with the files split into folders (example 5 files per folder):
 
 <p align="left">
   <!-- <a href="https://npmjs.com/package/retonio"><img src="https://badgen.net/npm/v/retonio" alt="npm package"></a> -->
-  <img src="https://ik.imagekit.io/vrfrbvdn0j/sddev/before_after.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643640069875" alt="GoScission before after">
+  <img src="https://ik.imagekit.io/vrfrbvdn0j/sddev/before_after.png?ik-sdk-version=javascript-1.4.3&updatedAt=1643641225915" alt="GoScission before after">
 </p>
+
+## Why
+
+I run frequently into the case, that I need to upload files to a service, which accepts only 50 by a time. By that I can upload folder by folder instead of checking by hand, which are the next 50 files.
+
+## Thanks for using
