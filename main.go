@@ -1,13 +1,14 @@
 package main
 
 import (
-	copy "choclatzie/pkg/copy"
-	make "choclatzie/pkg/make"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
+
+	copy "github.com/sdoerger/GoScission/pkg/copy"
+	make "github.com/sdoerger/GoScission/pkg/make"
 )
 
 const targetDir string = "gochoc"

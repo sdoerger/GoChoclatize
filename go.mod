@@ -1,4 +1,4 @@
-module choclatzie
+module github.com/sdoerger/GoScission
 
 go 1.17
 

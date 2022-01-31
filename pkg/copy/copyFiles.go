@@ -1,7 +1,6 @@
 package copy
 
 import (
-	make "choclatzie/pkg/make"
 	"fmt"
 	"io"
 	"io/fs"
@@ -9,6 +8,8 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+
+	make "github.com/sdoerger/GoScission/pkg/make"
 )
 
 func CopyFiles(s int /* start index */, e int /* end index */, d string /* dir path */, f []fs.FileInfo /* files */, i int /* index for dir */, targetDir string) {
