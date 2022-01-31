@@ -11,7 +11,7 @@ import (
 	make "github.com/sdoerger/GoScission/pkg/make"
 )
 
-const targetDir string = "gochoc"
+const targetDir string = "gosci"
 
 func main() {
 	// CLEAR CONSOLE
